@@ -1,0 +1,9 @@
+{% extends 'main.html' %}
+{% block contents %}
+        <div class="text-center items">
+            <div>{{ response['name'] }}</div>
+            <div>{{ "%.1f" % response['main']['temp'] }}&#8457 / {{ "%.1f" % ((response['main']['temp']-32)/1.8) }}&#176C</div>
+            <div>{{ response['weather'][0]['description'] }}</div>
+            <div class="icon-img"><img src="http://openweathermap.org/img/w/{{ response['weather'][0]['icon'] }}.png"></div>
+        </div>
+{% endblock %}

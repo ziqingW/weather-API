@@ -1,0 +1,26 @@
+{% extends 'main.html' %}
+{% block contents %}
+{% if records|length > 0 %}
+<div class="container">
+    <div class="row history-panel">
+    <div class="col-4 history-item"><h5>{{ city }}</h5></div>
+    <div class="history-item col-8">
+    {% for record in records %}
+    <div>
+            <div>{{ record['query_time']}}</div>
+            <div>{{ "%.1f" % record['contents']['main']['temp'] }}&#8457 / {{ "%.1f" % ((record['contents']['main']['temp']-32)/1.8) }}&#176C</div>
+            <div class="des_icon">
+            <div>{{ record['contents']['weather'][0]['description'] }}</div>
+            <div><img src="http://openweathermap.org/img/w/{{ record['contents']['weather'][0]['icon'] }}.png"></div>
+            </div>
+            <br>
+    </div>
+    {% endfor %}
+    </div>
+    </div>
+    </div>
+{% else %}
+<h5 class="history-error container text-center">No search history for <span style="color:red;">{{ city }}</span></h5>
+{% endif %}
+{% endblock %}
+
