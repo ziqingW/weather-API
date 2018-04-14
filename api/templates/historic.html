@@ -7,7 +7,7 @@
     <div class="history-item col-8">
     {% for record in records %}
     <div>
-            <div>{{ record['query_time']}}</div>
+            <div>{{ (record['query_time'] | string)[:-6] }}</div>
             <div>{{ "%.1f" % record['contents']['main']['temp'] }}&#8457 / {{ "%.1f" % ((record['contents']['main']['temp']-32)/1.8) }}&#176C</div>
             <div class="des_icon">
             <div>{{ record['contents']['weather'][0]['description'] }}</div>

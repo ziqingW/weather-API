@@ -1,16 +1,11 @@
 [[source]]
-
 url = "https://pypi.python.org/simple"
 name = "pypi"
 verify_ssl = true
 
-
 [dev-packages]
 
-
-
 [packages]
-
 tornado = "*"
 "jinja2" = "*"
 request = "*"
@@ -18,3 +13,6 @@ requests = "*"
 queries = "*"
 asyncio = "*"
 futures = "*"
+pip = "*"
+"python-geoip-geolite2" = "*"
+python-geoip = "*"

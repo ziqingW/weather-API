@@ -81,9 +81,6 @@ class MainHandler(TemplateHandler):
                 ''', {'city': city})
                 self.render_template('historic.html', {'records': records, 'city': city})
                 print("it's historic handler")
-                print(records)
-                for record in records:
-                    print(record['contents']['main']['temp'], record['time'])
         else:
             self.render_template('main.html', {}) 
 

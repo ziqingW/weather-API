@@ -1,4 +1,4 @@
-#!/usr/local/bin/pipenv
+
 import time
 import requests
 import queries
@@ -6,7 +6,7 @@ import json
 # import concurrent.futures
 
 cities = ['shanghai', 'houston', 'dallas', 'moscow', 'london', 'austin', 'washington', 'tokyo', 'paris', 'sydney', 'beijing', 'chicago', 'new york', 'los angeles', 'boston']
-# cities = ['shanghai', 'boston']
+
 def check_weather(city):
     session = queries.Session('postgresql://postgres@localhost:5432/weather_db')
     appid = '9ecc560e5c99c8be650566914f4192e6'
@@ -28,6 +28,6 @@ def check_weather(city):
 # with concurrent.futures.ThreadPoolExecutor(max_workers=NUM_WORKERS) as executor:
 #     futures = {executor.submit(check_weather, city.capitalize()) for city in cities}
 #     concurrent.futures.wait(futures)
-
-for city in cities:
-    check_weather(city.capitalize())
+if __name__ == '__main__':
+    for city in cities:
+        check_weather(city.capitalize())
