@@ -44,7 +44,7 @@
                 "sha256:ec0a6cb848cc212002b9828c3e34c675e0c9ff6741dc445cab6fdd4e1085d1f1"
             ],
             "index": "pypi",
-            "version": "==3.2.0"
+            "version": "==3.1.1"
         },
         "get": {
             "hashes": [
