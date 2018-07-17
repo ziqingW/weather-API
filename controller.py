@@ -36,7 +36,7 @@ class MainHandler(TemplateHandler):
         if city:
             city = city.capitalize()
             if search:
-                appid = '9ecc560e5c99c8be650566914f4192e6'
+                appid = os.environ.get('WEATHER_APP_ID')
                 url = 'http://api.openweathermap.org/data/2.5/weather'
                 payload = {'q': city, 'appid': appid, 'units': 'imperial'}
                 ts = time.localtime()
