@@ -24,8 +24,7 @@ class TemplateHandler(tornado.web.RequestHandler):
         self.set_header('Cache-Control', 'private')
         
     def initialize(self):
-        self.session = queries.Session(
-        'postgresql://postgres@localhost:5432/weather_db')
+        self.session = queries.Session(process.env.DATABASE_URL)
       
 class MainHandler(TemplateHandler):
     def get(self):
