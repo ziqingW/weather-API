@@ -50,10 +50,11 @@ class MainHandler(TemplateHandler):
                         print('database used', current_time)
                     elif 900 < current_time - weather[0]['time'] < 7200:
                         r = requests.get(url, params=payload)
+                        print(json.dumps(r.json()))
                         self.render_template('main_result.html', {'response': r.json()})
                         self.session.query('''
                         UPDATE weather_history 
-                        SET contents=%(contents)s, time=%(time)s, query_time=%(query_time)s WHERE city=%(city)s AND time=(SELECT max(time) from weather_history WHERE city=%(city)s''',
+                        SET contents=%(contents)s, time=%(time)s, query_time=%(query_time)s WHERE city=%(city)s AND time=(SELECT max(time) from weather_history WHERE city=%(city)s)''',
                         {'city': city, 'contents': json.dumps(r.json()), 'time': current_time, 'query_time': query_time})
                         print('fetched new data and updated db', current_time)
                     else:
