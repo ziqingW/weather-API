@@ -24,7 +24,7 @@ class TemplateHandler(tornado.web.RequestHandler):
         self.set_header('Cache-Control', 'private')
         
     def initialize(self):
-        self.session = queries.Session(process.env.DATABASE_URL)
+        self.session = queries.Session(os.environ.get(DATABASE_URL))
       
 class MainHandler(TemplateHandler):
     def get(self):
