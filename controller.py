@@ -14,7 +14,7 @@ ENV = Environment(
   loader=PackageLoader('api', 'templates'),
   autoescape=select_autoescape(['html', 'xml'])
 )
-
+DATABASE_URL = os.environ['DATABASE_URL']
 class TemplateHandler(tornado.web.RequestHandler):
     def render_template(self, tpl, context):
         template = ENV.get_template(tpl)
@@ -24,7 +24,7 @@ class TemplateHandler(tornado.web.RequestHandler):
         self.set_header('Cache-Control', 'private')
         
     def initialize(self):
-        self.session = queries.Session(os.environ.get(DATABASE_URL))
+        self.session = queries.Session(DATABASE_URL)
       
 class MainHandler(TemplateHandler):
     def get(self):
