@@ -43,7 +43,7 @@ class MainHandler(TemplateHandler):
                 fmt = '%Y-%m-%d %H:%M:%S'
                 query_time = time.strftime(fmt, ts)
                 weather = self.session.query('''
-                SELECT * FROM weather_history WHERE name=%(city)s ORDER BY time DESC''', {'city': city})
+                SELECT * FROM weather_history WHERE city=%(city)s ORDER BY time DESC''', {'city': city})
                 if len(weather) > 0:
                     if current_time - weather[0]['time'] <= 900:
                         self.render_template('main_result.html', {'response': weather[0]['contents']})
@@ -53,7 +53,7 @@ class MainHandler(TemplateHandler):
                         self.render_template('main_result.html', {'response': r.json()})
                         self.session.query('''
                         UPDATE weather_history 
-                        SET contents=%(contents)s, time=%(time)s, query_time=%(query_time)s WHERE name=%(city)s AND time=(SELECT max(time) from weather_history WHERE name=%(city)s''',
+                        SET contents=%(contents)s, time=%(time)s, query_time=%(query_time)s WHERE city=%(city)s AND time=(SELECT max(time) from weather_history WHERE city=%(city)s''',
                         {'city': city, 'contents': json.dumps(r.json()), 'time': current_time, 'query_time': query_time})
                         print('fetched new data and updated db', current_time)
                     else:
@@ -77,7 +77,7 @@ class MainHandler(TemplateHandler):
                         print('fetched new data, create new city', current_time)
             elif history:
                 records = self.session.query('''
-                SELECT * FROM weather_history WHERE name=%(city)s ORDER BY time DESC LIMIT 5
+                SELECT * FROM weather_history WHERE city=%(city)s ORDER BY time DESC LIMIT 5
                 ''', {'city': city})
                 self.render_template('historic.html', {'records': records, 'city': city})
                 print("it's historic handler")
